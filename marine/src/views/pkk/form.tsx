@@ -20,16 +20,6 @@ import FormControl from '@mui/material/FormControl'
 import FormHelperText from '@mui/material/FormHelperText'
 
 //auto complete
-import Autocomplete from '@mui/material/Autocomplete'
-import { pelabuhan } from 'src/@fake-db/negara'
-import { portID } from 'src/@fake-db/negara'
-import { portSG } from 'src/@fake-db/negara'
-
-import { mstLabel } from 'src/@fake-db/negara'
-
-const lblVesselName = mstLabel.find(item => item.lblId === 'lblVesselName')?.lblName || ''
-const lblVoyageIn = mstLabel.find(item => item.lblId === 'lblVoyageIn')?.lblName || ''
-const lblVoyageOut = mstLabel.find(item => item.lblId === 'lblVoyageOut')?.lblName || ''
 
 //const lblEta = mstLabel.find(item => item.lblId === 'lblEta')?.lblName || ''
 //const lblEtd = mstLabel.find(item => item.lblId === 'lblEtd')?.lblName || ''
@@ -141,9 +131,6 @@ const FormPkk = () => {
   //   nama: string
   // }
 
-  const [vNegara] = useState('')
-  const [vNegaraPort, setvNegaraPort] = useState('')
-
   // const [vIdNegaraPort] = useState('')
 
   //const handleChange = (event: SyntheticEvent, newValue: FilmOptionType | null) => {
@@ -231,7 +218,7 @@ const FormPkk = () => {
                   render={({ field: { value, onChange } }) => (
                     <TextField
                       value={value}
-                      label={lblVesselName}
+                      label='Vessel Name'
                       onChange={e => {
                         //onChange(e), setNama(e.target.value)
                         onChange(e), onChange2(e.target.value)
@@ -284,7 +271,7 @@ const FormPkk = () => {
                   render={({ field: { value, onChange } }) => (
                     <TextField
                       value={value}
-                      label={lblVoyageIn}
+                      label='Voyage In'
                       onChange={onChange}
                       error={Boolean(errors.voy_in)}
                       placeholder=''
@@ -309,7 +296,7 @@ const FormPkk = () => {
                   render={({ field: { value, onChange } }) => (
                     <TextField
                       value={value}
-                      label={lblVoyageOut}
+                      label='Voyage Out'
                       onChange={onChange}
                       error={Boolean(errors.voy_out)}
                       placeholder=''
@@ -397,70 +384,6 @@ const FormPkk = () => {
               )}
             </Grid>
 
-            <Grid item xs={12} sm={6}>
-              <FormControl fullWidth>
-                <Controller
-                  name='negara'
-                  control={control}
-                  rules={{ required: true }}
-                  render={({ field }) => (
-                    <Autocomplete
-                      options={pelabuhan}
-                      onChange={(event, newValue) => {
-                        field.onChange(newValue)
-                      }}
-                      id='autocomplete-controlled'
-                      getOptionLabel={option => option.title || ''}
-                      renderInput={params => (
-                        <TextField
-                          {...params}
-                          label='Country'
-                          error={Boolean(errors.negara)}
-                          aria-describedby='validation-basic-select'
-                        />
-                      )}
-                    />
-                  )}
-                />
-                {errors.negara && (
-                  <FormHelperText sx={{ color: 'error.main' }} id='validation-basic-select'>
-                    This field is required
-                  </FormHelperText>
-                )}
-              </FormControl>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <FormControl fullWidth>
-                <Controller
-                  name='port'
-                  control={control}
-                  rules={{ required: true }}
-                  render={({ field }) => (
-                    <Autocomplete
-                      options={vNegara === 'ID' ? portID : portSG}
-                      onChange={(event, newValue) => {
-                        field.onChange(newValue)
-                        setvNegaraPort(vNegara)
-                      }}
-                      id='autocomplete-controlled2'
-                      renderInput={params => (
-                        <TextField
-                          {...params}
-                          label='Port'
-                          error={vNegara == vNegaraPort ? Boolean(errors.negara) : true}
-                          aria-describedby='validation-basic-port'
-                        />
-                      )}
-                    />
-                  )}
-                />
-                {errors.port && (
-                  <FormHelperText sx={{ color: 'error.main' }} id='validation-basic-port'>
-                    This field is required
-                  </FormHelperText>
-                )}
-              </FormControl>
-            </Grid>
             <Grid item xs={12} sm={6}>
               <FormControl fullWidth>
                 <InputLabel
