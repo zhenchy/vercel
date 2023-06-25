@@ -1,5 +1,5 @@
 // ** React Imports
-import { forwardRef, useState, ChangeEvent, SyntheticEvent } from 'react'
+import { forwardRef, useState, ChangeEvent } from 'react'
 
 // ** MUI Imports
 import Card from '@mui/material/Card'
@@ -48,7 +48,6 @@ import DialogContentText from '@mui/material/DialogContentText'
 import DatePicker from 'react-datepicker'
 import { useForm, Controller } from 'react-hook-form'
 import { Breakpoint } from '@mui/material'
-import { AutocompleteType } from 'src/@fake-db/types'
 
 //import { ReactDatePickerProps } from 'react-datepicker'
 
@@ -57,30 +56,10 @@ import { AutocompleteType } from 'src/@fake-db/types'
 
 //import Alert from '../components/dialogs/Alert'
 
-interface State {
-  password: string
-  showPassword: boolean
-}
-
-interface FormInputs {
-  dob: string
-  radio: string
-  select: string
-  password: string
-  textarea: string
-  checkbox: boolean
-  ves_name: string
-  pkk_no: string
-  voy_in: string
-  voy_out: string
-  eta: string
-  etd: string
-  jn_kunjungan: string
-  jn_kemasan: string
-  kegiatan: string
-  negara: string
-  port: string
-}
+// interface State {
+//   password: string
+//   showPassword: boolean
+// }
 
 interface CustomInputProps {
   value: string
@@ -95,20 +74,29 @@ const defaultValues = {
   select: '',
   password: '',
   textarea: '',
-  ves_name: '',
-  pkk_no: '',
-  voy_in: '',
-  voy_out: '',
-  eta: null,
-  etd: '',
-  jn_kunjungan: '',
-  jn_kemasan: '',
-  kegiatan: '',
-  negara: '',
-  port: '',
-  checkbox: false
+  checkbox: false,
+  etd: ''
 }
 
+type FormInputs = {
+  dob: string | null
+  eta: string
+  radio: string
+  select: string
+  password: string
+  textarea: string
+  checkbox: boolean
+  etd: string
+  ves_name: string
+  pkk_no: string
+  voy_in: string
+  voy_out: string
+  jn_kunjungan: string
+  jn_kemasan: string
+  kegiatan: string
+  negara: string
+  port: string
+}
 const CustomInput = forwardRef(({ ...props }: CustomInputProps, ref) => {
   return <TextField inputRef={ref} {...props} sx={{ width: '100%' }} />
 })
@@ -136,25 +124,27 @@ const FormPkk = () => {
 
   //const onSubmit = () => toast.success('Form Submitted')
 
-  const onSubmit = data => {
+  const onSubmit = (data: any) => {
     console.log('Form validation berhasil')
+    console.log(data)
 
     // Lakukan tindakan selanjutnya, seperti mengirim data ke server, dll.
   }
 
   //autocomplete
-  interface FilmOptionType {
-    id: string
-    title: string
-  }
-  interface portOptionType {
-    unlocode: string
-    nama: string
-  }
+  // interface FilmOptionType {
+  //   id: string
+  //   title: string
+  // }
+  // interface portOptionType {
+  //   unlocode: string
+  //   nama: string
+  // }
 
-  const [vNegara, setvNegara] = useState('')
+  const [vNegara] = useState('')
   const [vNegaraPort, setvNegaraPort] = useState('')
-  const [vIdNegaraPort] = useState('')
+
+  // const [vIdNegaraPort] = useState('')
 
   //const handleChange = (event: SyntheticEvent, newValue: FilmOptionType | null) => {
   //  setValue(newValue)
@@ -163,21 +153,21 @@ const FormPkk = () => {
   //  console.log(newValue?.title + ' ' + newValue?.id)
   //}
 
-  const handleChange = (event: SyntheticEvent, newValue: FilmOptionType | null) => {
-    console.log(newValue?.title + ' ' + newValue?.id)
-    setvNegara(newValue?.id || '')
-    if (newValue) {
-      console.log('ada nilai baru ' + newValue.title + ' ' + newValue.id)
-    }
-  }
+  // const handleChange = (event: SyntheticEvent, newValue: FilmOptionType | null) => {
+  //   console.log(newValue?.title + ' ' + newValue?.id)
+  //   setvNegara(newValue?.id || '')
+  //   if (newValue) {
+  //     console.log('ada nilai baru ' + newValue.title + ' ' + newValue.id)
+  //   }
+  // }
 
-  const handleChange2 = (event: SyntheticEvent, newValue: portOptionType | null) => {
-    if (newValue) {
-      const portOption = newValue as portOptionType
-      console.log(portOption.unlocode + ' ' + portOption.nama)
-      console.log(portOption)
-    }
-  }
+  // const handleChange2 = (event: SyntheticEvent, newValue: portOptionType | null) => {
+  //   if (newValue) {
+  //     const portOption = newValue as portOptionType
+  //     console.log(portOption.unlocode + ' ' + portOption.nama)
+  //     console.log(portOption)
+  //   }
+  // }
 
   const [nama, setNama] = useState('henky')
   const onChange2 = (ves_name: string) => {
@@ -223,7 +213,7 @@ const FormPkk = () => {
 
   const handleClose = () => setOpen(false)
 
-  const [selectedOption, setSelectedOption] = useState<AutocompleteType | null>(null)
+  // const [selectedOption, setSelectedOption] = useState<AutocompleteType | null>(null)
 
   return (
     <Card>
@@ -342,7 +332,6 @@ const FormPkk = () => {
                 rules={{ required: true }}
                 render={({ field: { value, onChange } }) => (
                   <DatePicker
-                    selected={value}
                     showTimeSelect
                     timeFormat='HH:mm'
                     timeIntervals={10}
@@ -379,7 +368,6 @@ const FormPkk = () => {
                 rules={{ required: true }}
                 render={({ field: { value, onChange } }) => (
                   <DatePicker
-                    selected={value}
                     showTimeSelect
                     timeFormat='HH:mm'
                     timeIntervals={10}
@@ -417,11 +405,9 @@ const FormPkk = () => {
                   rules={{ required: true }}
                   render={({ field }) => (
                     <Autocomplete
-                      value={field.value}
                       options={pelabuhan}
                       onChange={(event, newValue) => {
                         field.onChange(newValue)
-                        handleChange(event, newValue)
                       }}
                       id='autocomplete-controlled'
                       getOptionLabel={option => option.title || ''}
@@ -451,15 +437,12 @@ const FormPkk = () => {
                   rules={{ required: true }}
                   render={({ field }) => (
                     <Autocomplete
-                      value={vNegara === vNegaraPort ? field.value : null}
                       options={vNegara === 'ID' ? portID : portSG}
                       onChange={(event, newValue) => {
                         field.onChange(newValue)
-                        handleChange2(event, newValue)
                         setvNegaraPort(vNegara)
                       }}
                       id='autocomplete-controlled2'
-                      getOptionLabel={option => option.unlocode || ''}
                       renderInput={params => (
                         <TextField
                           {...params}
