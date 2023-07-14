@@ -1,26 +1,30 @@
-// ** Type import
-import { VerticalNavItemsType } from 'src/@core/layouts/types'
+import { useEffect, useState } from 'react';
+import { VerticalNavItemsType } from '../../../src/@core/layouts/types';
+import { ApiResponseType } from 'src/types/api/responseType';
 
-const navigation = (): VerticalNavItemsType => {
-  return [
-    {
-      title: 'Home',
-      path: '/home',
-      icon: 'mdi:home-outline'
-    },
-    {
-      title: 'PKK',
-      icon: 'mdi:email-outline',
-      path: '/pkk'
-    },
-    {
-      path: '/acl',
-      action: 'read',
-      subject: 'acl-page',
-      title: 'Access Control',
-      icon: 'mdi:shield-outline'
+const Navigation = (): VerticalNavItemsType => {
+  const [menuData, setMenuData] = useState<VerticalNavItemsType>()
+
+  const fetchMenuData = async () => {
+    try {
+      const apiUrl = process.env.API_URL
+
+      const res = await fetch(`${apiUrl}/api/menu?l=a`);
+
+      const data: ApiResponseType = await res.json()
+
+      setMenuData(data.data)
+
+    } catch (error) {
+      console.log('error:', error.message)
     }
-  ]
-}
+  }
 
-export default navigation
+  useEffect(() => {
+    fetchMenuData()
+  }, [])
+
+  return menuData
+};
+
+export default Navigation;

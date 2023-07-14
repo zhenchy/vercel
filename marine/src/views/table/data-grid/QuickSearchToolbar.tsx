@@ -5,12 +5,14 @@ import { ChangeEvent } from 'react'
 import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import IconButton from '@mui/material/IconButton'
-import { GridToolbarFilterButton } from '@mui/x-data-grid'
+import { GridToolbarContainer, GridToolbarExport } from '@mui/x-data-grid'
 
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
 
 interface Props {
+  isExport: boolean
+  alignContent: string
   value: string
   clearSearch: () => void
   onChange: (e: ChangeEvent) => void
@@ -24,11 +26,12 @@ const QuickSearchToolbar = (props: Props) => {
         display: 'flex',
         flexWrap: 'wrap',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: props.alignContent,
         p: theme => theme.spacing(2, 5, 4, 5)
       }}
     >
-      <GridToolbarFilterButton />
+      <GridToolbarContainer>{props.isExport && <GridToolbarExport />}</GridToolbarContainer>
+
       <TextField
         size='small'
         value={props.value}
