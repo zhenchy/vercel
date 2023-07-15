@@ -194,6 +194,7 @@ console.log("jn_fasilitas : "+data.jn_fasilitas)
                       value={ dataList.id}
                       error={vid_fasilitas && value === ''}
                       aria-describedby='id'
+                      disabled
                       onChange={e => {
                         onChange(e),
                         setvid_fasilitas(true);

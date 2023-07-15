@@ -25,7 +25,7 @@ const Handler = async (
   switch (req.method) {
     case 'GET':
       try {
-        const connection = await db.connect();
+        // const connection = await db.connect();
 
         result = [];
         if (result.length <= 0) {

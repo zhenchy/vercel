@@ -16,6 +16,7 @@ const TableFilterColumn = (props: {
   isExport?: boolean
   alignContent?: string
   isLoading?: boolean,
+
   //  onRowSelected: any
 }) => {
   const { title, rows, columns, isExport = true, alignContent = 'space-between', isLoading = false } = props
@@ -39,13 +40,13 @@ const TableFilterColumn = (props: {
     }
   }
 
-  const handleRowClick = (params: any) => {
-    const selectedRow = rows.find((row: any) => row.id === params.id)
-    // props.onRowSelected(selectedRow)
-    console.log(selectedRow)
+  // const handleRowClick = (params: any) => {
+  //   const selectedRow = rows.find((row: any) => row.id === params.id)
+  //   // props.onRowSelected(selectedRow)
+  //   console.log(selectedRow)
 
-    // props.onRowSelected(selectedRow)
-  }
+  //   // props.onRowSelected(selectedRow)
+  // }
 
   return (
     <Card>
@@ -55,6 +56,7 @@ const TableFilterColumn = (props: {
         autoHeight
         rows={filteredData.length ? filteredData : rows}
         columns={columns}
+
         // onRowClick={handleRowClick}
         pageSizeOptions={[5, 10, 25, 50]}
         slots={{
