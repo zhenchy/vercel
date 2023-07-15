@@ -12,7 +12,7 @@ import PageHeader from 'src/@core/components/page-header'
 // ** Demo Components Imports
 
 import FormValidationBasic from 'src/views/pkk/form'
-import TableFilter from 'src/views/table/data-grid/TableFilter'
+//import TableFilter from 'src/views/table/data-grid/TableFilter'
 
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 
@@ -41,7 +41,7 @@ const DataGrid = () => {
         </Grid>
 
         <Grid item xs={12}>
-          <TableFilter />
+         
         </Grid>
       </Grid>
     </DatePickerWrapper>
