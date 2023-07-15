@@ -88,7 +88,9 @@ const DataGrid = () => {
   const handleEditBtn = (id: string, dataList: ty_data_list ) => {
     const fetchData = async () => {
       try {
-        const {jn_fasilitas} = dataList;
+
+        //const {jn_fasilitas} = dataList;
+
         //// //load dari API ==
         // console.log("jn_fasilitas = ",jn_fasilitas)
         // console.log("obj_satu = ",obj_satu)

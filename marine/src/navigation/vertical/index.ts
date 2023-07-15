@@ -15,6 +15,7 @@ const Navigation = (): VerticalNavItemsType => {
 
       setMenuData(data.data)
 
+
     } catch (error) {
       console.log('error:', error.message)
     }

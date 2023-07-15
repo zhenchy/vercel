@@ -37,6 +37,7 @@ export default async function handler(
 
       const webmenu2 = await rep.find({ where: { MENU_LEVEL: "2" }, order: { MENU_INDEX: "asc" } });
 
+
       await db.disconnect()
 
       const datamenu = [];

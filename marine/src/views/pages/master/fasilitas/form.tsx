@@ -1,5 +1,5 @@
 // ** React Imports
-import { forwardRef, useState, ChangeEvent, SyntheticEvent, useEffect } from 'react'
+import {  useState,  useEffect } from 'react'
 
 // ** MUI Imports
 import Card from '@mui/material/Card'
@@ -23,7 +23,7 @@ import DialogContentText from '@mui/material/DialogContentText'
 //import toast from 'react-hot-toast'
 
 import { useForm, Controller } from 'react-hook-form'
-import { Autocomplete, Breakpoint, MenuItem, Select, SelectChangeEvent } from '@mui/material'
+import { Autocomplete, Breakpoint,  } from '@mui/material'
 
 
 
@@ -62,6 +62,7 @@ export interface ViewDataProps {
 
 
 export type AutocompleteType = {
+
   // value: string
   // label: string
   label: string
@@ -82,7 +83,7 @@ const FormData = ({
   dataList,
 }: ViewDataProps) => {
   const {handleSubmit, setValue} = useForm();
-  const { control,formState: { errors } } = useForm<FormInputs>({ defaultValues })
+  const { control } = useForm<FormInputs>({ defaultValues })
 
 
   //alert
@@ -104,9 +105,13 @@ const FormData = ({
   const [jn_fasilitas, setjn_fasilitas] = useState('');
   const [st_fasilitas, setst_fasilitas] = useState('');
   const [st_fasilitas_descr, setst_fasilitas_descr] = useState('');
-  const [do_form, setdo_form] = useState('new');
 
  ///* eslint-enable*/
+ nm_fasilitas
+ jn_fasilitas
+ st_fasilitas
+ st_fasilitas_descr
+ vst_fasilitas_descr
 
 
 
@@ -159,12 +164,12 @@ console.log("jn_fasilitas : "+data.jn_fasilitas)
 
   };
 
-  function autoOnChange (event, newValue){
-    console.log("autoonchange = ",newValue)
-    setValueA(newValue);
-    setvst_fasilitas_descr(true);
-    setValue('st_fasilitas_descr', newValue? stFasilitas[+newValue.id] : stFasilitas[0])
-  }
+  // function autoOnChange (event, newValue){
+  //   console.log("autoonchange = ",newValue)
+  //   setValueA(newValue);
+  //   setvst_fasilitas_descr(true);
+  //   setValue('st_fasilitas_descr', newValue? stFasilitas[+newValue.id] : stFasilitas[0])
+  // }
 
 
   const [valueA, setValueA] = useState(stFasilitas[0]);
@@ -216,7 +221,7 @@ console.log("jn_fasilitas : "+data.jn_fasilitas)
                 <Controller
                   name='nm_fasilitas'
                   control={control}
-                  rules={{ required: true }}
+                   rules={{ required: true }}
                   render={({ field: { value, onChange } }) => (
                     <TextField
                       label='Nama Fasilitas'

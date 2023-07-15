@@ -91,7 +91,7 @@ export interface ViewDataProps {
 const FormValidationBasic = ({dataList,}: ViewDataProps) => {
   const [errorsA, setErrorsA] = useState<FormErrors>({})
 
-  const { setValue} = useForm();
+
 
   const [formData, setFormData] = useState({} as any)
 
@@ -108,7 +108,7 @@ const handleChange = (field: string, event: any) => {
 }
 
 
-const [vnm_fasilitas, setvnm_fasilitas] = useState<boolean>(false)
+
   useEffect(()=>{
 
 

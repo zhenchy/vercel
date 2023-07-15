@@ -47,6 +47,7 @@ const Handler = async (
         .addSelect("DECODE(a.STATUS, '1', 'ACTIVE', '0', 'NOT ACTIVE', 'NOT SET')" , "STATUS_DESCR")
         .addSelect('b.DESCR','JN_FAS_DESCR')
         .innerJoin("a.SysCodesLocal", "b", "b.CODE_TP = 'JN_FAS'")
+
         // .where("status='1'")
         //.andWhere(id ? "fasilitas_id=:vid" : "1=1" )
         .where(id ? "fasilitas_id=:vid" : "1=1" )
@@ -65,6 +66,7 @@ const Handler = async (
           st_fasilitas : data.STATUS,
           st_fasilitas_descr : data.STATUS_DESCR,
         }));
+
         //console.log(result);
 
 
